@@ -1,4 +1,3 @@
-
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer or Players.PlayerAdded:Wait()
 
@@ -43,53 +42,59 @@ local Window = Rayfield:CreateWindow({
 
 local Tab = Window:CreateTab("Scripts", "file-code")
 
+local function safeLoad(url)
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+    if not success then
+        warn("Failed to load script at "..url..": "..err)
+    end
+end
+
 -- MM2 Script Button
 Tab:CreateButton({
     Name = "MM2 Script",
     Callback = function()
         Rayfield:Destroy()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2"))()
+        safeLoad("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2")
     end,
 })
 
--- Additional scripts
-
+-- Rivals
 Tab:CreateButton({
     Name = "Rivals",
     Callback = function()
         Rayfield:Destroy()
-        loadstring(game:HttpGet("https://scriptblox.com/script/RIVALS-Ambrion-Hub-V3-46731"))()
+        safeLoad("https://raw.githubusercontent.com/VisioneducationOfLuaCoding/Ambrion/main/RivalsVersion3")
     end,
 })
 
+-- Bladeball
 Tab:CreateButton({
     Name = "Bladeball",
     Callback = function()
         Rayfield:Destroy()
-        loadstring(game:HttpGet("https://scriptblox.com/script/Bladeball-teleporter-Atlas-Hub-V1-34986"))()
+        safeLoad("https://raw.githubusercontent.com/VisioneducationOfLuaCoding/BladeBall/main/ScriptLoader")
     end,
 })
 
+-- Arsenal
 Tab:CreateButton({
     Name = "Arsenal",
     Callback = function()
         Rayfield:Destroy()
-        loadstring(game:HttpGet("https://scriptblox.com/script/Arsenal-Vision-Hub-V1-29921"))()
+        safeLoad("https://raw.githubusercontent.com/VisioneducationOfLuaCoding/Arsenal/main/Ambrion")
     end,
 })
 
-Tab:CreateButton({
-    Name = "Grow a Garden",
-    Callback = function()
-        Rayfield:Destroy()
-        loadstring(game:HttpGet("https://scriptblox.com/script/Universal-Script-Atlas-Hub-V1-46722"))()
-    end,
-})
-
+-- Steal a Brainrot
 Tab:CreateButton({
     Name = "Steal a Brainrot",
     Callback = function()
         Rayfield:Destroy()
-        loadstring(game:HttpGet("https://scriptblox.com/script/Steal-a-Brainrot-Steal-Speed-Sky-Walk-Spinbot-Neon-Avatar-47493"))()
+        safeLoad("https://raw.githubusercontent.com/VisioneducationOfLuaCoding/StealABrainrot/main/Ambrion")
     end,
 })
+
+Rayfield:LoadConfiguration()
+Rayfield:SetVisibility(true)
